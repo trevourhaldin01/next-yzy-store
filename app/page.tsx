@@ -3,8 +3,9 @@
 import {useState, useEffect, useCallback, useTransition} from 'react'
 import {motion , AnimatePresence} from 'motion/react'
 import { Product,products } from "@/lib/products"
-import Header from "@/components/header"
+import {Header} from "@/components/header"
 import { ProductImage } from '@/components/product-image'
+import { AddToCart } from '@/components/add-to-cart'
 
 export default function Page(){
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -75,7 +76,7 @@ export default function Page(){
             !!selectedProduct → Negates it again, ensuring that the value is strictly true or false.
       */}
       <Header isBackVisible={!!selectedProduct} onBack={handleBack}  />
-      <main className='flex-grow relative pt-12'>
+      <main className='flex-grow relative '>
         <motion.div
           className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-9 gap-x-5 gap-y-12 pb-8"
           animate={{opacity: selectedProduct ? 0 : 1 }}
@@ -127,7 +128,7 @@ export default function Page(){
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.3 }}
               >
-                {/* <AddToCart product={selectedProduct} /> */}
+                <AddToCart product={selectedProduct} />
               </motion.div>
               
 

@@ -2,22 +2,30 @@
 
 import { useState } from "react"
 
-import MainMenu from "./main-menu"
+import {MainMenu} from "./main-menu"
 import { useCart } from "./cart-context"
+import { Cart } from './cart';
 
 interface HeaderProps {
     isBackVisible: boolean;
     onBack: any;
   }
 
-export default function Header({isBackVisible, onBack}: HeaderProps){
+export  function Header({isBackVisible, onBack}: HeaderProps){
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { items } = useCart();
+    const totalQuantity = items.reduce((total, item) => total + item.quantity, 0);
     return (
         <nav className="flex justify-between fxed top-0 left-0 right-0 z-10">
             <div>
                 <MainMenu isBackVisible={isBackVisible} onBack={onBack} />
             </div>
             <div>
-                <button>
+                <button
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    className="relative z-20 size-12 flex items-center justify-center"
+                    aria-label="Cart"
+                >
                     <svg
                         className="size-6"
                         aria-hidden="true"
@@ -42,7 +50,9 @@ export default function Header({isBackVisible, onBack}: HeaderProps){
                         strokeLinecap="round"
                         ></path>
                     </svg>
+                    <span className="ml-1 font-semibold">{totalQuantity}</span>
                 </button>
+                <Cart isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
             </div>
         </nav>
     )

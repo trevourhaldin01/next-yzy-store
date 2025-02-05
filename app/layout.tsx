@@ -30,11 +30,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* <script
+            crossOrigin="anonymous"
+            src="//unpkg.com/react-scan/dist/auto.global.js"
+          /> */}
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <CartProvider>
-          <div className="flex flex-col min-h-screen h-screen mx-5 overflow-y-scroll">
+          <div className="flex flex-col min-h-screen h-screen mx-5 ">
             {children}
           </div>
         </CartProvider>
